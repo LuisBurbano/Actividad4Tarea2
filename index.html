@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+
+    <!-- Agrega la referencia a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="mt-4">Lista de Tareas</h1>
+
+        <form id="formularioTareas">
+            <div class="form-group">
+                <label for="descripcionTarea">Nueva Tarea:</label>
+                <input type="text" class="form-control" id="descripcionTarea" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="agregarTarea()">Agregar Tarea</button>
+        </form>
+
+        <ul id="listaTareas" class="pl-0"></ul>
+    </div>
+
+    <!-- Agrega la referencia a Bootstrap JS y Popper.js (necesarios para ciertos componentes de Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="js/Tarea.js"></script>
+    <script src="js/ListaTareas.js"></script>
+    <script src="js/VistaTareas.js"></script>
+    <script src="js/ControladorTareas.js"></script>
+
+    <script>
+        const modeloTareas = new ListaTareas();
+        const vistaTareas = new VistaTareas();
+        const controladorTareas = new ControladorTareas(modeloTareas, vistaTareas);
+
+        function agregarTarea() {
+            const descripcionTarea = document.getElementById('descripcionTarea').value;
+            controladorTareas.agregarTarea(descripcionTarea);
+            document.getElementById('descripcionTarea').value = '';
+        }
+
+        controladorTareas.actualizarVista();  // Actualiza la vista inicialmente
+
+    </script>
+
+</body>
+
+</html>
